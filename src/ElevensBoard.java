@@ -54,10 +54,11 @@ public class ElevensBoard extends Board {
     @Override
     public boolean isLegal(List<Integer> selectedCards) {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-        if(selectedCards.size() > 2 && !containsJQK())
-        {
-
-        }
+        if(selectedCards.size() == 2 && containsPairSum11(selectedCards))
+            return true;
+        if(selectedCards.size() == 3 && containsJQK(selectedCards))
+            return true;
+        return false;
     }
 
 
@@ -72,7 +73,28 @@ public class ElevensBoard extends Board {
     @Override
     public boolean anotherPlayIsPossible() {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-        return true;
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
+        boolean jTrue = false;
+        for(int i = 0; i < 9; i++)
+        {
+            if(cardAt(i).rank().equals("jack"))
+                a = true;
+            if(cardAt(i).rank().equals("queen"))
+                b = true;
+            if(cardAt(i).rank().equals("king"))
+                c = true;
+        }
+        if(a && b && c)
+            jTrue = true;
+        for(int i = 0; i < 9; i++)
+        {
+            for(int j = 0; i < 9; i++)
+            {
+
+            }
+        }
     }
 
     /**
@@ -84,7 +106,8 @@ public class ElevensBoard extends Board {
      *              contain an 11-pair; false otherwise.
      */
     private boolean containsPairSum11(List<Integer> selectedCards) {
-        /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        if(cardAt(selectedCards.get(0)).pointValue() + cardAt(selectedCards.get(1)).pointValue() == 11)
+            return true;
         return false;
     }
 
@@ -97,7 +120,22 @@ public class ElevensBoard extends Board {
      *              include a jack, a queen, and a king; false otherwise.
      */
     private boolean containsJQK(List<Integer> selectedCards) {
-        /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        if(selectedCards.size() != 3)
+            return false;
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
+        for(Integer i : selectedCards)
+        {
+            if(cardAt(i).rank().equals("jack"))
+                a = true;
+            if(cardAt(i).rank().equals("queen"))
+                b = true;
+            if(cardAt(i).rank().equals("king"))
+                c = true;
+        }
+        if(a && b && c)
+            return true;
         return false;
     }
 }
