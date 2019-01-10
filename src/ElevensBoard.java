@@ -76,7 +76,6 @@ public class ElevensBoard extends Board {
         boolean a = false;
         boolean b = false;
         boolean c = false;
-        boolean jTrue = false;
         for(int i = 0; i < 9; i++)
         {
             if(cardAt(i).rank().equals("jack"))
@@ -87,14 +86,17 @@ public class ElevensBoard extends Board {
                 c = true;
         }
         if(a && b && c)
-            jTrue = true;
+            return true;
         for(int i = 0; i < 9; i++)
         {
             for(int j = 0; i < 9; i++)
             {
-
+                if(j != i)
+                    if(cardAt(i).pointValue() + cardAt(j).pointValue() == 11)
+                        return true;
             }
         }
+        return false;
     }
 
     /**
